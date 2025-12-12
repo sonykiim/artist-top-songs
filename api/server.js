@@ -16,7 +16,7 @@ const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 
 
-const SPOTIFY_API_URL = 'https://api.spotify.com';
+const SPOTIFY_API_URL = 'https://api.spotify.com/v1';
 
 let accessToken = null;
 let tokenExpiry = 0;
