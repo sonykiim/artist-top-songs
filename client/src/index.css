@@ -1,0 +1,195 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fbb5f2;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+#root {
+  width: 100%;
+  max-width: 800px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #f02494;
+  text-align: center;
+  margin-bottom: 25px;
+  font: times new roman, serif;
+}
+
+.search-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+#artistInput {
+  flex-grow: 1;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#searchButton {
+  padding: 10px 20px;
+  background-color: #f97fd1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+#searchButton:hover {
+  background-color: #259bd5;
+}
+
+.artist-info {
+  border-top: 2px solid #eee;
+  padding-top: 20px;
+}
+
+.artist-info h2 {
+  color: #1d47b9;
+  margin-top: 20px;
+}
+
+.artist-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#artistImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.details p {
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
+.details p span {
+  font-weight: bold;
+  color: #333;
+}
+
+#topTracksList {
+  list-style: disc inside;
+  padding-left: 0;
+}
+
+#topTracksList li {
+  margin-bottom: 8px;
+  padding-left: 5px;
+  border-bottom: 1px dotted #ddd;
+}
+
+.album-track-list li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.album-track-list img {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.track-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.track-details-group {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.track-details-group img {
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+}
+
+.spotify-link {
+  background-color: pink; 
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+
+.search-controls-container {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 30px;
+}
+
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.suggestions-list li {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.suggestions-list li:hover {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.suggestions-loading {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding: 10px 15px;
+  background-color: #f9f9f9;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-top: none;
+  font-style: italic;
+  color: #666;
+  box-sizing: border-box;
+}
