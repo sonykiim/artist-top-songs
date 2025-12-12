@@ -1,6 +1,6 @@
 
 // load environment variables
-require('dotenv').config(); 
+//require('dotenv').config(); 
 
 const express = require('express');
 const cors = require('cors');
@@ -16,7 +16,7 @@ const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 
 
-const SPOTIFY_API_URL = 'https://api.spotify.com/v1';
+const SPOTIFY_API_URL = 'https://api.spotify.com';
 
 let accessToken = null;
 let tokenExpiry = 0;
