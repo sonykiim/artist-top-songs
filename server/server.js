@@ -1,13 +1,13 @@
 
-// 1. Load environment variables
+// load environment variables
 require('dotenv').config(); 
 
 const express = require('express');
 const cors = require('cors');
-const fetch = require('node-fetch').default; // Use 'fetch' for making requests
+const fetch = require('node-fetch').default; // use 'fetch' for making requests
 
 const app = express();
-const PORT = 3001; 
+const PORT = 3001; // choose a port for backend
 
 app.use(cors());
 app.use(express.json());
@@ -21,11 +21,13 @@ const SPOTIFY_API_URL = 'https://api.spotify.com/v1';
 let accessToken = null;
 let tokenExpiry = 0;
 
+//function to securely get or refresh the spotify access token
 const getAccessToken = async () => {
+    //checks if we already have a valid token
     if (accessToken && Date.now() < tokenExpiry) {
         return accessToken;
     }
-
+// request new token
     console.log("Requesting new Spotify access token...");
     try {
         const authUrl = 'https://accounts.spotify.com/api/token';
@@ -47,7 +49,7 @@ const getAccessToken = async () => {
 
         const data = await response.json();
         accessToken = data.access_token;
-        // Spotify tokens last 3600 seconds, set expiry 5 minutes early for safety
+        // while spotify tokens last 3600 seconds, set expiry 5 minutes early for safety
         tokenExpiry = Date.now() + (data.expires_in - 300) * 1000; 
         
         console.log("New token successfully acquired.");
@@ -59,6 +61,7 @@ const getAccessToken = async () => {
     }
 };
 
+//ensures that we have a valid access token 
 const requireAccessToken = async (req, res, next) => {
     try {
         const token = await getAccessToken();
@@ -69,8 +72,7 @@ const requireAccessToken = async (req, res, next) => {
     }
 };
 
-// 3. Implement the /api/suggest route
-// Used by your suggestArtists function in React
+// implements the /api/suggest route used by suggestArtists function in React
 app.get('/api/suggest', requireAccessToken, async (req, res) => {
     const query = req.query.q;
     if (!query) {
@@ -106,8 +108,7 @@ app.get('/api/suggest', requireAccessToken, async (req, res) => {
     }
 });
 
-// 4. Implement the /api/search route
-// Used by your searchArtist function in React
+// implements the /api/search route used by searchArtist function in React
 app.get('/api/search', requireAccessToken, async (req, res) => {
     const artistName = req.query.name;
     if (!artistName) {
@@ -133,7 +134,7 @@ app.get('/api/search', requireAccessToken, async (req, res) => {
 
         const artistId = artist.id;
         
-        // Fetch Artist Profile data
+        // fetch artist profile data
         const profileUrl = `${SPOTIFY_API_URL}/artists/${artistId}`;
         const profileResponse = await fetch(profileUrl, {
             headers: { 'Authorization': `Bearer ${req.spotifyToken}` }
@@ -144,7 +145,7 @@ app.get('/api/search', requireAccessToken, async (req, res) => {
         }
         const profileData = await profileResponse.json();
 
-        // Fetch Artist Top Tracks (in the US)
+        // fetch artist top tracks (in the US)
         const topTracksUrl = `${SPOTIFY_API_URL}/artists/${artistId}/top-tracks?market=US`;
         const topTracksResponse = await fetch(topTracksUrl, {
             headers: { 'Authorization': `Bearer ${req.spotifyToken}` }
@@ -155,7 +156,7 @@ app.get('/api/search', requireAccessToken, async (req, res) => {
         }
         const topTracksData = await topTracksResponse.json();
 
-        // Combine all data and send to the client
+        // combine all data and send to the client
         const finalArtistData = {
             ...profileData,
             topTracks: topTracksData.tracks || [],
