@@ -4,7 +4,7 @@
 
 const express = require('express');
 const cors = require('cors');
-const fetch = require('node-fetch').default; // use 'fetch' for making requests
+//const fetch = require('node-fetch').default; // use 'fetch' for making requests
 
 const app = express();
 const PORT = 3001; // choose a port for backend
